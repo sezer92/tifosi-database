@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `boisson`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `boisson` (
   `id_boisson` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) NOT NULL,
+  `nom` varchar(50) NOT NULL,
   `volume_ml` int(11) NOT NULL,
-  `prix` decimal(10,2) NOT NULL,
+  `prix` decimal(5,2) NOT NULL,
   `id_marque` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_boisson`),
   KEY `id_marque` (`id_marque`),
-  CONSTRAINT `boisson_ibfk_1` FOREIGN KEY (`id_marque`) REFERENCES `marque` (`id_marque`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  CONSTRAINT `boisson_ibfk_1` FOREIGN KEY (`id_marque`) REFERENCES `marque` (`id_marque`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `boisson` (
 
 LOCK TABLES `boisson` WRITE;
 /*!40000 ALTER TABLE `boisson` DISABLE KEYS */;
-INSERT INTO `boisson` VALUES (1,'San Pellegrino Limonata',330,2.50,1),(2,'Coca-Cola',330,2.00,2);
+INSERT INTO `boisson` VALUES (1,'San Pellegrino Limonata',330,2.50,1),(2,'Coca-cola',330,2.00,1),(3,'Fanta citron',330,2.00,1);
 /*!40000 ALTER TABLE `boisson` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,14 +53,14 @@ DROP TABLE IF EXISTS `focaccia`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `focaccia` (
   `id_focaccia` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) NOT NULL,
-  `prix` decimal(10,2) NOT NULL,
-  `description` text DEFAULT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prix` decimal(5,2) NOT NULL,
+  `description` text NOT NULL,
   `id_marque` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_focaccia`),
   KEY `id_marque` (`id_marque`),
-  CONSTRAINT `focaccia_ibfk_1` FOREIGN KEY (`id_marque`) REFERENCES `marque` (`id_marque`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  CONSTRAINT `focaccia_ibfk_1` FOREIGN KEY (`id_marque`) REFERENCES `marque` (`id_marque`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `focaccia` (
 
 LOCK TABLES `focaccia` WRITE;
 /*!40000 ALTER TABLE `focaccia` DISABLE KEYS */;
-INSERT INTO `focaccia` VALUES (1,'Focaccia Classique',5.50,'Focaccia avec tomate, mozzarella et basilic',1);
+INSERT INTO `focaccia` VALUES (1,'Focaccia Classique',5.50,'Focaccia avec tomate, mozzarella et basilic',1),(2,'Hawaienne',8.50,'Base tomate, jambon et ananas',1);
 /*!40000 ALTER TABLE `focaccia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,8 +82,7 @@ DROP TABLE IF EXISTS `ingredient`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ingredient` (
   `id_ingredient` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) NOT NULL,
-  `categorie` varchar(50) DEFAULT NULL,
+  `nom_ingredient` varchar(50) NOT NULL,
   PRIMARY KEY (`id_ingredient`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -94,7 +93,7 @@ CREATE TABLE `ingredient` (
 
 LOCK TABLES `ingredient` WRITE;
 /*!40000 ALTER TABLE `ingredient` DISABLE KEYS */;
-INSERT INTO `ingredient` VALUES (1,'Tomate','Légume'),(2,'Mozzarella','Fromage'),(3,'Basilic','Herbe');
+INSERT INTO `ingredient` VALUES (1,'Tomate'),(2,'Mozzarella'),(3,'Basilic');
 /*!40000 ALTER TABLE `ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,10 +106,9 @@ DROP TABLE IF EXISTS `marque`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `marque` (
   `id_marque` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(100) NOT NULL,
-  `origine` varchar(50) DEFAULT NULL,
+  `nom` varchar(50) NOT NULL,
   PRIMARY KEY (`id_marque`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +117,7 @@ CREATE TABLE `marque` (
 
 LOCK TABLES `marque` WRITE;
 /*!40000 ALTER TABLE `marque` DISABLE KEYS */;
-INSERT INTO `marque` VALUES (1,'San Pellegrino','Italie'),(2,'Coca-Cola','USA');
+INSERT INTO `marque` VALUES (1,'Coca-cola'),(2,'Cristalline'),(3,'Monster'),(4,'Pepsico');
 /*!40000 ALTER TABLE `marque` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22  2:43:58
+-- Dump completed on 2024-11-25  3:09:21
